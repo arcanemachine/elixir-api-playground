@@ -20,20 +20,20 @@ defmodule HelloApi.Json.Openweather do
 
   Parameters:
 
-    - api_key: The OpenWeather API key used to make the request
-      - If the OPENWEATHER_API_KEY environment variable is present, then that value will be used.
-        Otherwise, the `api_key` parameter MUST be present.
-
-    - city: The city whose weather you are requesting. (default: "Grande Prairie")
-      - The city name will be URL-encoded to ensure that special characters (e.g. spaces) are
+    - q: The location whose weather you are requesting. (default: "Grande Prairie")
+      - The location name will be URL-encoded to ensure that special characters (e.g. spaces) are
         parsed correctly.
+
+    - appid: The OpenWeather API key used to make the request
+      - If the OPENWEATHER_API_KEY environment variable is present, then that value will be used.
+        Otherwise, the `appid` parameter MUST be present.
 
     - units: The units of measurement. (default: "standard")
   """
-  def get_weather(opts \\ []) do
+  def current(opts \\ []) do
     # merge default opts with opts passed by user
     default_opts = [
-      api_key: System.get_env("OPENWEATHER_API_KEY"),
+      appid: System.get_env("OPENWEATHER_API_KEY"),
       city: "Edmonton",
       units: "metric"
     ]
@@ -41,17 +41,16 @@ defmodule HelloApi.Json.Openweather do
     opts = Keyword.merge(default_opts, opts)
 
     # ensure that we have an API key before continuing
-    ensure_api_key(opts[:api_key])
+    ensure_api_key(opts[:appid])
 
     # send a request to the API server and return the response
-    url =
-      "#{@current_weather_endpoint}?q=#{URI.encode(opts[:city])}&appid=#{opts[:api_key]}&units=#{opts[:units]}"
+    url = "#{@current_weather_endpoint}?#{URI.encode_query(opts)}"
 
     Req.get!(url)
   end
 
   @doc "Returns the current temperature from an OpenWeather API response."
-  def get_temperature(res) do
+  def current_temperature(res) do
     res.body["main"]["temp"]
   end
 end
