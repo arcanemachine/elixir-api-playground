@@ -35,8 +35,11 @@ defmodule ApiPlayground.Openweather do
   Non-URL options (stripped before generating the API URL query string):
 
     - `http_client`: The HTTP client used to make the request. (default: "req")
+      - Must be one of: "req", "httpoison"
       - This option exists only as a form of documentation in regards to how to use each client.
-      - Must be one of: "req"
+        - Notes:
+          - Req automatically detects JSON responses in the body and decodes them into a map
+          - HTTPoison returns a string which must manually be decoded (use `Jason.decode!/2`)
   """
   def current(opts \\ []) do
     # merge default opts with opts passed by user
@@ -60,8 +63,15 @@ defmodule ApiPlayground.Openweather do
     url = "#{@current_weather_endpoint}?#{URI.encode_query(opts)}"
 
     case http_client do
-      "req" -> Req.get!(url)
-      _ -> throw("Option 'http_client' must be one of: \"req\"")
+      "req" ->
+        Req.get!(url)
+
+      "httpoison" ->
+        HTTPoison.start()
+        HTTPoison.get!(url)
+
+      _ ->
+        throw("Option 'http_client' must be one of: \"req\"")
     end
   end
 
