@@ -1,11 +1,10 @@
-defmodule ApiPlayground.Json.Openweather do
-  @moduledoc "JSON-related functions for the OpenWeather API."
+defmodule ApiPlayground.Openweather do
+  @moduledoc "Functions related to the OpenWeather API."
   alias Req
-
   @current_weather_endpoint "https://api.openweathermap.org/data/2.5/weather"
 
-  @doc "Throws an exception if an API key has not been passed to the function."
-  def ensure_api_key(api_key) do
+  defp _ensure_api_key(api_key) do
+    ## Throws an exception if an API key has not been passed to the function.
     if is_nil(api_key),
       do:
         throw(
@@ -34,14 +33,15 @@ defmodule ApiPlayground.Json.Openweather do
     # merge default opts with opts passed by user
     default_opts = [
       appid: System.get_env("OPENWEATHER_API_KEY"),
-      city: "Edmonton",
-      units: "metric"
+      q: "Edmonton",
+      units: "metric",
+      mode: "json"
     ]
 
     opts = Keyword.merge(default_opts, opts)
 
     # ensure that we have an API key before continuing
-    ensure_api_key(opts[:appid])
+    _ensure_api_key(opts[:appid])
 
     # send a request to the API server and return the response
     url = "#{@current_weather_endpoint}?#{URI.encode_query(opts)}"
