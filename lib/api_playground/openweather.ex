@@ -19,15 +19,18 @@ defmodule ApiPlayground.Openweather do
 
   Parameters:
 
-    - q: The location whose weather you are requesting. (default: "Grande Prairie")
-      - The location name will be URL-encoded to ensure that special characters (e.g. spaces) are
-        parsed correctly.
-
-    - appid: The OpenWeather API key used to make the request
+    - `appid`: The OpenWeather API key used to make the request (default: nil)
       - If the OPENWEATHER_API_KEY environment variable is present, then that value will be used.
         Otherwise, the `appid` parameter MUST be present.
 
-    - units: The units of measurement. (default: "standard")
+    - `mode`: The format of the data to be returned (default: "json")
+      - Must be one of: "json", "xml"
+
+    - `q`: The location of the weather you are requesting (default: "Grande Prairie")
+      - The location name will be URL-encoded to ensure that special characters (e.g. spaces) are
+        parsed correctly.
+
+    - `units`: The units of measurement. (default: "standard")
   """
   def current(opts \\ []) do
     # merge default opts with opts passed by user
