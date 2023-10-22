@@ -1,4 +1,4 @@
-defmodule HelloApi.Json.Openweather do
+defmodule ApiPlayground.Json.Openweather do
   @moduledoc "JSON-related functions for the OpenWeather API."
   alias Req
 

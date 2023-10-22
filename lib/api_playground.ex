@@ -1,6 +1,6 @@
-defmodule HelloApi do
+defmodule ApiPlayground do
   @moduledoc """
-  Documentation for `HelloApi`.
+  Documentation for `ApiPlayground`.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule HelloApi do
 
   ## Examples
 
-      iex> HelloApi.hello()
+      iex> ApiPlayground.hello()
       :world
 
   """
