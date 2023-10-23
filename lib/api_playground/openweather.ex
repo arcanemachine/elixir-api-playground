@@ -34,8 +34,8 @@ defmodule ApiPlayground.Openweather do
 
   Non-URL options (stripped before generating the API URL query string):
 
-    - `http_client`: The HTTP client used to make the request. (default: "req")
-      - Must be one of: "req", "httpoison"
+    - `http_client`: The HTTP client used to make the request. (default: `:req`)
+      - Must be one of: `:req`, `:httpoison`
       - This option exists only as a form of documentation in regards to how to use each client.
         - Notes:
           - Req automatically detects JSON responses in the body and decodes them into a map
@@ -48,7 +48,7 @@ defmodule ApiPlayground.Openweather do
       q: "Edmonton",
       units: "metric",
       mode: "json",
-      http_client: "req"
+      http_client: :req
     ]
 
     opts = Keyword.merge(default_opts, opts)
@@ -63,20 +63,22 @@ defmodule ApiPlayground.Openweather do
     url = "#{@current_weather_endpoint}?#{URI.encode_query(opts)}"
 
     case http_client do
-      "req" ->
+      :req ->
         Req.get!(url)
 
-      "httpoison" ->
+      :httpoison ->
         HTTPoison.start()
         HTTPoison.get!(url)
 
       _ ->
-        throw(~s|Option 'http_client' must be one of: "req", "httpoison"|)
+        throw(~s|Option 'http_client' must be one of: :req, :httpoison|)
     end
   end
 
-  @doc "Returns the current temperature from an OpenWeather API response."
+  @doc "Given an OpenWeather API response, returns the current temperature."
   def current_temperature(res) do
     res.body["main"]["temp"]
   end
+
+  @doc "Given an OpenWeather API response, returns the sunrise and sunset times as ."
 end
