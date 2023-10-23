@@ -26,7 +26,8 @@ defmodule ApiPlayground.MixProject do
       {:jason, "~> 1.4.0"},
       {:sweet_xml, "~> 0.7.4"},
       {:req, "~> 0.4.0"},
-      {:httpoison, "~> 2.1.0"}
+      {:httpoison, "~> 2.1.0"},
+      {:timex, "~> 3.7.11"}
     ]
   end
 end
