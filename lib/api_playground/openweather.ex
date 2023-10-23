@@ -45,7 +45,7 @@ defmodule ApiPlayground.Openweather do
     # merge default opts with opts passed by user
     default_opts = [
       appid: System.get_env("OPENWEATHER_API_KEY"),
-      q: "Edmonton",
+      q: "Grande Prairie",
       units: "metric",
       mode: "json",
       http_client: :req
