@@ -15,7 +15,7 @@ defmodule ApiPlayground.Openweather do
   end
 
   @doc """
-  Makes a request to the OpenWeather API server for the current weather. Returns a Req response.
+  Makes a request to the OpenWeather API server for the current weather.
 
   URL options (appended to the API URL):
 
@@ -71,7 +71,7 @@ defmodule ApiPlayground.Openweather do
         HTTPoison.get!(url)
 
       _ ->
-        throw("Option 'http_client' must be one of: \"req\"")
+        throw(~s|Option 'http_client' must be one of: "req", "httpoison"|)
     end
   end
 
