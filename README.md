@@ -94,12 +94,25 @@ Also a dumping ground for notes related to the basic usage of various API-relate
 
   - Timex.parse("2023-10-22T22:23:07Z", "{ISO:Extended}")
 
+- Convert a naive datetime to a timezone-aware datetime:
+
+  - `Timex.to_datetime(naive_datetime)` (Will convert to UTC by default)
+  - `Timex.to_datetime(naive_datetime, "America/Chicago")`
+
 - Shift a date or time:
 
   - `Timex.shift(date, days: 1, minutes: -5)`
 
 - Convert a datetime to a different timezone:
+
   - `Timezone.convert(datetime, timezone)`
+
+- Specify the date in a given format:
+
+  - Using the `:default` formatter: `Timex.format(datetime, "{YYYY}-{M}-{D}")`
+  - Using the `:strftime` formatter: `Timex.format(datetime, "%Y-%m-%d", :strftime)`
+
+- Get the diff between 2 dates: `Timex.diff(first_datetime, second_datetime)`
 
 ## SweetXml Cheatsheet
 
