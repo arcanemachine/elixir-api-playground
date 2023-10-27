@@ -1,4 +1,4 @@
-defmodule ApiPlayground.Openweather do
+defmodule ApiPlayground.OpenWeather do
   @moduledoc "Functions related to the OpenWeather API."
   alias Req
   @current_weather_endpoint "https://api.openweathermap.org/data/2.5/weather"
@@ -79,6 +79,4 @@ defmodule ApiPlayground.Openweather do
   def current_temperature(res) do
     res.body["main"]["temp"]
   end
-
-  @doc "Given an OpenWeather API response, returns the sunrise and sunset times as ."
 end

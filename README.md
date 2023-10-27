@@ -4,7 +4,7 @@ An Elixir library for me to explore the usage of JSON- and XML-powered APIs.
 
 Also a dumping ground for notes related to the basic usage of various API-related libraries.
 
-## Weather API
+## OpenWeather API
 
 - To retrieve the current weather:
   - JSON: `ApiPlayground.Openweather.current()`
