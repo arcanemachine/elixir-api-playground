@@ -1,5 +1,6 @@
 defmodule ApiPlayground.OpenWeather do
   @moduledoc "Functions related to the OpenWeather API."
+  import SweetXml
   alias Req
   @current_weather_endpoint "https://api.openweathermap.org/data/2.5/weather"
 
@@ -76,7 +77,11 @@ defmodule ApiPlayground.OpenWeather do
   end
 
   @doc "Given an OpenWeather API response, returns the current temperature."
-  def current_temperature(res) do
-    res.body["main"]["temp"]
+  def current_temperature(res, mode \\ "json") do
+    case mode do
+      "json" -> res.body["main"]["temp"]
+      "xml" -> res.body |> xpath(~x"//temperature/@value")
+      _ -> throw(~s|mode must be one of: "json", "xml"|)
+    end
   end
 end

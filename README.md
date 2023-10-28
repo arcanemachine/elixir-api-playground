@@ -129,6 +129,9 @@ Also a dumping ground for notes related to the basic usage of various API-relate
 
 - Query the parsed XML (or XML string): `SweetXml.parse(your_xml)`
 
+- List of XPath functions (LLM chatbots useful for questions/info):
+  - https://developer.mozilla.org/en-US/docs/Web/XPath/Functions
+
 Example XML data:
 
 ```xml
@@ -178,7 +181,6 @@ Example XML data:
 </game>
 ```
 
--
 - Get the root element:
 
   - `xpath(xml, ~x"//*")` or `xpath(xml, ~x"//game")`
